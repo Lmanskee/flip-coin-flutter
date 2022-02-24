@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'buttons.dart';
+import 'default.dart';
+import 'custom_rounded_clipper.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({ Key? key }) : super(key: key);
@@ -9,35 +11,35 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final mainColorApp = Color.fromRGBO(240, 207, 62, 1);
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text('FlipCoin'),
-            TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: mainColorApp,
-                shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
-                fixedSize: Size(110, 110),
+      body: Column(
+        children: [
+          Stack(
+            children: [
+              ClipPath(
+                clipper: CustomRoundedClipper(),
+                child: Container(
+                  color: mainAppColor,
+                  height: 400,
+                )
               ),
-              onPressed: null,
-              child: const Icon(
-                Icons.play_arrow,
-                color: Colors.white,
-                size: 60,
-              ),
+            ]
+          ),
+
+          Container(
+            alignment: Alignment.center,
+            width: double.infinity,
+            margin: EdgeInsets.only(top: 160),
+            child: Stack(
+              children: [
+                PlayButton(),
+              ],
             ),
-          ],
-        ),
-      ),
+          )
+        ],
+      )
     );
   }
 }
