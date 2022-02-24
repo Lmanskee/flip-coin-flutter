@@ -21,8 +21,23 @@ class _HomePageState extends State<HomePage> {
               ClipPath(
                 clipper: CustomRoundedClipper(),
                 child: Container(
-                  color: mainAppColor,
+                  color: buttonColor,
                   height: 400,
+                  alignment: Alignment.center,
+                  child: RichText(
+                    text: const TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(text: 'Coin\n', style: TextStyle(
+                          fontFamily: "Montserrat", 
+                          fontSize: 25
+                        )),
+                        TextSpan(text: 'Flip', style: TextStyle(
+                          fontFamily: "Montserrat", 
+                          fontSize: 60
+                        )),
+                      ]
+                    ),
+                  )
                 )
               ),
             ]
@@ -30,14 +45,9 @@ class _HomePageState extends State<HomePage> {
 
           Container(
             alignment: Alignment.center,
-            width: double.infinity,
-            margin: EdgeInsets.only(top: 160),
-            child: Stack(
-              children: [
-                PlayButton(),
-              ],
-            ),
-          )
+            padding: EdgeInsets.all(60),
+            child: PlayButton(),
+          ),
         ],
       )
     );

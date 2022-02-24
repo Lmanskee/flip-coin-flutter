@@ -14,7 +14,7 @@ class _PlayButtonState extends State<PlayButton> {
     return TextButton(
       // Style: Rounded shape
       style: TextButton.styleFrom(
-        backgroundColor: mainAppColor,
+        backgroundColor: buttonColor,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30))
         ),
