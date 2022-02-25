@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'default.dart';
+import 'flip_coin_page.dart';
 
 class PlayButton extends StatefulWidget {
   const PlayButton({ Key? key }) : super(key: key);
@@ -22,7 +23,9 @@ class _PlayButtonState extends State<PlayButton> {
       ),
 
       // OnPressed required value => flip_coin_page
-      onPressed: null,
+      onPressed: () {
+        Navigator.of(context).pushNamed('/flip');
+      },
       
       // Play Rounded Icon: button
       child: const Icon(

@@ -5,7 +5,6 @@ import 'custom_rounded_clipper.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({ Key? key }) : super(key: key);
-
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -26,26 +25,33 @@ class _HomePageState extends State<HomePage> {
                   alignment: Alignment.center,
                   child: RichText(
                     text: const TextSpan(
-                      children: <TextSpan>[
+                      children: 
+                      <TextSpan>[
                         TextSpan(text: 'Coin\n', style: TextStyle(
                           fontFamily: "Montserrat", 
-                          fontSize: 25
+                          fontSize: 56,
+                          letterSpacing: -1,
+                          fontWeight: FontWeight.bold,
                         )),
+                
                         TextSpan(text: 'Flip', style: TextStyle(
                           fontFamily: "Montserrat", 
-                          fontSize: 60
+                          fontSize: 110,
+                          letterSpacing: -1,
+                          height: .9,
                         )),
                       ]
                     ),
-                  )
+                  ),
                 )
-              ),
+              )
             ]
           ),
 
+          SizedBox(height: 60),
+
           Container(
             alignment: Alignment.center,
-            padding: EdgeInsets.all(60),
             child: PlayButton(),
           ),
         ],
