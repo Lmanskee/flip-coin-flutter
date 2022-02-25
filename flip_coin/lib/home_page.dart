@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
             ]
           ),
 
-          SizedBox(height: 60),
+          const SizedBox(height: 60),
 
           Container(
             alignment: Alignment.center,
