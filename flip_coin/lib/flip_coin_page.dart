@@ -16,20 +16,17 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
         children: const[
           Expanded(
             flex: 4,
-            child: Padding(
-              padding: EdgeInsets.all(20),
-              child: ImageSequenceAnimator(
-                "assets/coinSequence",
-                "files_render",
-                1,
-                4,
-                "png",
-                144,
-                fps: 25,
-                isLooping: false,
-                isBoomerang: false,
-                isAutoPlay: true,
-              ),
+            child: ImageSequenceAnimator(
+              "assets/coinSequence",
+              "files_render",
+              1,
+              4,
+              "png",
+              20,
+              fps: 60,
+              isLooping: true,
+              isBoomerang: false,
+              isAutoPlay: false,
             ),
           )
         ],
