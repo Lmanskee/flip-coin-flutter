@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'buttons.dart';
-import 'default.dart';
+import '../buttons.dart';
+import '../default.dart';
 import 'custom_rounded_clipper.dart';
 
 class HomePage extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'home_page.dart';
-import 'flip_coin_page.dart';
-import 'restart_page.dart';
+import 'package:flip_coin/screens/home_page/home_page.dart';
+import 'package:flip_coin/screens/flip_coin_page/flip_coin_page.dart';
+import 'package:flip_coin/screens/restart_page/restart_page.dart';
 
 void main() => runApp(const MyApp());
 
