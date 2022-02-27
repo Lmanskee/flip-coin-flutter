@@ -18,7 +18,7 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
             flex: 4,
             child: ImageSequenceAnimator(
               "assets/coinSequence",
-              "files_render",
+              "xxx",
               1,
               4,
               "png",
