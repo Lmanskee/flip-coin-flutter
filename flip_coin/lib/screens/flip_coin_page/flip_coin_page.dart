@@ -12,11 +12,19 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
   @override
   Widget build(BuildContext context) {    
     return Scaffold(
-      body: ListView(
-        children: [
-          Lottie.asset('assets/coin.json'),
-          
-        ],
+      appBar: AppBar(
+        title: Text("Lottie Test"),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              child: Lottie.asset(
+                  'assets/coin.json'),
+            ),
+          ],
+        ),
       ),
     );
   }
