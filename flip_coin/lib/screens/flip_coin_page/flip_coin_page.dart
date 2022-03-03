@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:rive/rive.dart';
+import 'package:flip_coin/screens/flip_coin_page/random_animation.dart';
 
 class FlipCoinPage extends StatefulWidget {
   const FlipCoinPage({ Key? key }) : super(key: key);
@@ -10,54 +10,36 @@ class FlipCoinPage extends StatefulWidget {
 }
 
 class _FlipCoinPageState extends State<FlipCoinPage> { 
-  late Artboard _artboard;
   late RiveAnimationController _controller;
+
+  bool _isPlaying = false;
 
   @override
   void initState() {
-    _loadRiveFile();
     super.initState();
-  }
-
-  void _loadRiveFile() async {
-    final bytes = await rootBundle.load('assets/coinflip.riv');
-    final file = RiveFile.import(bytes);
-
-    setState(() {
-      _artboard = file.mainArtboard;
-    });
-  }
-
-  void _coinFlipReturnS() async {
-    _artboard.addController(
-      _controller = SimpleAnimation('CoinFlipReturnS'),
+    _controller = OneShotAnimation(
+      randomAnimation(),
+      autoplay: false,
+      onStop: () => setState(() => _isPlaying = false),
+      onStart: () => setState(() => _isPlaying = true),
     );
-    setState(() => _controller.isActive = true);
-  }
-
-  void _coinFlipReturnC() async {
-    _artboard.addController(
-      _controller = SimpleAnimation('CoinFlipReturnC'),
-    );
-    setState(() => _controller.isActive = true);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height - 250,
-            child: _artboard != null
-                ? Rive(
-                    artboard: _artboard,
-                    fit: BoxFit.cover,
-                  )
-                : Container()),
-        TextButton(onPressed: () => _coinFlipReturnS(), child: Text('Return C')),
-        TextButton(onPressed: () => _coinFlipReturnC(), child: Text('Return S'))
-      ],
+    return Scaffold(
+      body: Center(
+        child: RiveAnimation.asset(
+          'assets/coinflip.riv',
+          controllers: [_controller],
+        ),
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _isPlaying ? null : _controller.isActive = true,
+        tooltip: 'Play',
+        child: const Icon(Icons.play_arrow),
+      ),
     );
   }
 }
