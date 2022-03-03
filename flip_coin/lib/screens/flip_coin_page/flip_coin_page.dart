@@ -14,7 +14,6 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
 
   bool _isPlaying = false;
 
-  bool _visible = false;
 
   @override
   void initState() {
@@ -23,11 +22,12 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
       randomAnimation(),
       autoplay: false,
       onStop: () => setState(() {
-        _visible = true;
         _isPlaying = false;
+        if (randomAnimation() == 'CoinFlipReturnC') {
+
+        }
       }),
       onStart: () => setState(() { 
-        _visible = false;
         _isPlaying = true;
       }),
     );
@@ -39,24 +39,6 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                child: AnimatedOpacity(
-                  opacity: _visible ? 1.0 : 0.0,
-                  duration: const Duration(milliseconds: 500),
-                  child: Text(
-                    textShow(),
-                    style: const TextStyle(
-                      fontSize: 40
-                    ),
-                  )
-                )
-              )
-            ],
-          ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -73,16 +55,15 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
               ),
             ],
           ),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              
+            ],
+          )
         ]
       )
     );
-  }
-}
-
-String textShow() {
-  if (randomAnimation() == 'CoinFlipReturnS') {
-    return 'CARA';
-  } else {
-    return 'COROA';
   }
 }

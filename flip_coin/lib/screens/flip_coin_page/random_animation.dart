@@ -3,9 +3,13 @@ import 'dart:math';
 int randomNumber = Random().nextInt(2);
 
 String randomAnimation() {
+  String retorno;
+
   if(randomNumber == 1) {
-    return 'CoinFlipReturnS';
+    retorno = 'CoinFlipReturnS';
   } else{
-    return 'CoinFlipReturnC';
+    retorno = 'CoinFlipReturnC';
   }
+  
+  return retorno;
 }
