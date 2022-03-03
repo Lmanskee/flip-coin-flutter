@@ -12,7 +12,7 @@ class _RestartPageState extends State<RestartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: [
+        children: const [
           Text('Tela 2')
         ],
       )

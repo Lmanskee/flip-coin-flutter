@@ -29,14 +29,13 @@ class _HomePageState extends State<HomePage> {
                       <TextSpan>[
                         TextSpan(text: 'Coin\n', style: TextStyle(
                           fontFamily: "Montserrat", 
-                          fontSize: 56,
+                          fontSize: 55,
                           letterSpacing: -1,
-                          fontWeight: FontWeight.bold,
                         )),
                 
                         TextSpan(text: 'Flip', style: TextStyle(
                           fontFamily: "Montserrat", 
-                          fontSize: 110,
+                          fontSize: 115,
                           letterSpacing: -1,
                           height: .9,
                         )),
@@ -52,7 +51,7 @@ class _HomePageState extends State<HomePage> {
 
           Container(
             alignment: Alignment.center,
-            child: PlayButton(),
+            child: const PlayButton(),
           ),
         ],
       )
