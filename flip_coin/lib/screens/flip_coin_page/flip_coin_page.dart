@@ -10,34 +10,32 @@ class FlipCoinPage extends StatefulWidget {
 }
 
 class _FlipCoinPageState extends State<FlipCoinPage> { 
-  late RiveAnimationController _controller;
+  late RiveAnimationController _startAnimationController;
 
   bool _isPlaying = false;
-
 
   @override
   void initState() {
     super.initState();
-    _controller = OneShotAnimation(
+    _startAnimationController = OneShotAnimation(
       randomAnimation(),
       autoplay: false,
       onStop: () => setState(() {
         _isPlaying = false;
-        if (randomAnimation() == 'CoinFlipReturnC') {
-
-        }
       }),
       onStart: () => setState(() { 
-        _isPlaying = true;
+        _isPlaying = true;      
       }),
     );
   }
 
   @override
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -46,22 +44,15 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
                 width: 370,
                 height: 370,
                 child: GestureDetector(
-                  onTap: () => _isPlaying ? null : _controller.isActive = true,
+                  onTap: () => _isPlaying ? null : _startAnimationController.isActive = true,
                   child: RiveAnimation.asset(
                     'assets/coinflip.riv',
-                    controllers: [_controller],
+                    controllers: [_startAnimationController],
                   ),
                 ),
               ),
             ],
           ),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              
-            ],
-          )
         ]
       )
     );
