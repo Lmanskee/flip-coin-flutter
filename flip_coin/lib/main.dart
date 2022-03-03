@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flip_coin/screens/home_page/home_page.dart';
 import 'package:flip_coin/screens/flip_coin_page/flip_coin_page.dart';
-import 'package:flip_coin/screens/restart_page/restart_page.dart';
 import 'package:flip_coin/screens/default.dart';
 
 void main() => runApp(const MyApp());
@@ -20,7 +19,6 @@ class MyApp extends StatelessWidget {
       routes: {
         '/':(context) => const HomePage(),
         '/flip':(context) => const FlipCoinPage(),
-        '/restart':(context) => const RestartPage(),
       },
     );
   }
