@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
 
           Container(
             alignment: Alignment.center,
-            child: const PlayButton(),
+            child: const EntryAppButton(),
           ),
         ],
       )

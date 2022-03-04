@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flip_coin/screens/default.dart';
 
-class PlayButton extends StatefulWidget {
-  const PlayButton({ Key? key }) : super(key: key);
+class EntryAppButton extends StatefulWidget {
+  const EntryAppButton({ Key? key }) : super(key: key);
 
   @override
-  _PlayButtonState createState() => _PlayButtonState();
+  State<EntryAppButton> createState() => _EntryAppButtonState();
 }
 
-class _PlayButtonState extends State<PlayButton> {
-  @override
+class _EntryAppButtonState extends State<EntryAppButton> {
+   @override
   Widget build(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(
