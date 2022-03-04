@@ -1,7 +1,7 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rive/rive.dart';
+import 'package:flip_coin/screens/flip_coin_page/random_animation.dart';
 import 'package:flip_coin/screens/default.dart';
 
 class FlipCoinPage extends StatefulWidget {
@@ -14,30 +14,11 @@ class FlipCoinPage extends StatefulWidget {
 class _FlipCoinPageState extends State<FlipCoinPage> { 
   SMIInput<bool>? _isPlayingInput;
   SMIInput<bool>? _isRestartingInput;
-  SMIInput<int>? _isNumberInput;
+  SMIInput<bool>? _isNumberInput;
   Artboard? _coinFlipArtboard;
 
-  bool _isButtonVisible = true;
-  bool _isRestartButton = false;
-
   void _playCoinFlipAnimation() {
-    _isNumberInput?.value = Random().nextInt(2);
-    if (_isPlayingInput?.value == false && 
-        _isPlayingInput?.controller.isActive == false) {
-      _isPlayingInput?.value = true;
-    } else if (_isPlayingInput?.value == true && 
-        _isPlayingInput?.controller.isActive == false &&
-        _isRestartingInput?.value == false &&
-        _isRestartingInput?.controller.isActive == false) {
-      _isRestartingInput?.value = true;
-      _isPlayingInput?.value = false;
-    } else if (_isPlayingInput?.value == false && 
-        _isPlayingInput?.controller.isActive == false &&
-        _isRestartingInput?.value == true &&
-        _isRestartingInput?.controller.isActive == false) {
-      _isRestartingInput?.value = false;
-      _isPlayingInput?.value = true;
-    }
+
   }
 
   @override
@@ -99,7 +80,11 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
           
               onPressed: () {
                 setState(() {
-                  _playCoinFlipAnimation();
+                  if (_isRestartButton) {
+                    _restartAnimationController.isActive = true;
+                  } else {
+                    _startAnimationController.isActive = true;
+                  }
                 });
               },
 
