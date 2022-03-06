@@ -12,44 +12,34 @@ class FlipCoinPage extends StatefulWidget {
 }
 
 class _FlipCoinPageState extends State< FlipCoinPage> { 
-  SMIInput<bool>? _isPlayingInput;
-  SMIInput<bool>? _isRestartingInput;
+  SMIInput<bool>? _PlayInput;
+  SMIInput<bool>? _RestartInput;
   SMIInput<double>? _randomNumberInput;
   Artboard? _coinFlipArtboard;
-
+  
   bool _isButtonVisible = true;
   bool _isRestartButton = false;
 
   void _playCoinFlipAnimation() {
     _randomNumberInput?.value = (1 + Random().nextInt(2).toDouble());
 
-    print(_isPlayingInput?.controller.isActive);
-    print(_isRestartingInput?.controller.isActive);
-
-    if (_isPlayingInput?.value == false &&
-        _isPlayingInput?.controller.isActive == false &&
-        _isRestartingInput?.value == false &&
-        _isRestartingInput?.controller.isActive == false) { 
-
-      _isPlayingInput?.value = true;
-    }  
-    else if (_isPlayingInput?.value == true &&
-        _isPlayingInput?.controller.isActive == false &&
-        _isRestartingInput?.value == false &&
-        _isRestartingInput?.controller.isActive == false) {
-
-      _isPlayingInput?.value = false;
-      _isRestartingInput?.value = true;
-      _isRestartButton = false;
-    } 
-    else if (_isPlayingInput?.value == false &&
-        _isPlayingInput?.controller.isActive == false &&
-        _isRestartingInput?.value == true &&
-        _isRestartingInput?.controller.isActive == false) {
-
-      _isPlayingInput?.value = true;
-      _isRestartingInput?.value = false;
-      _isRestartButton = true;
+    if (_PlayInput?.value == false &&
+        _PlayInput?.controller.isActive == false &&
+        _RestartInput?.value == false &&
+        _RestartInput?.controller.isActive == false) {
+      _PlayInput?.value = true; 
+    } else if (_PlayInput?.value == true &&
+               _PlayInput?.controller.isActive == false &&
+               _RestartInput?.value == false &&
+               _RestartInput?.controller.isActive == false) {
+      _PlayInput?.value = false;
+      _RestartInput?.value = true;
+    } else if (_PlayInput?.value == false &&
+               _PlayInput?.controller.isActive == false &&
+               _RestartInput?.value == true &&
+               _RestartInput?.controller.isActive == false) {
+      _RestartInput?.value = true;
+      _PlayInput?.value = false;
     }
   }
 
@@ -62,20 +52,14 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
 
       var controller = StateMachineController.fromArtboard(
         artboard,
-        'CoinFlipAnimation',
+        'CoinFlip',
       );
 
       if (controller != null) {
         artboard.addController(controller);
-        _isPlayingInput = controller.findInput('isPlaying');
-        _isRestartingInput = controller.findInput('isRestarting');
-        _randomNumberInput = controller.findInput('randomNumber');
-        _isPlayingInput?.value = false;
-        _isPlayingInput?.controller.isActive = false;
-        _isRestartingInput?.value = false;
-        _isRestartingInput?.controller.isActive = false;
-
-        _randomNumberInput?.value = 0;
+        _PlayInput = controller.findInput('Play');
+        _RestartInput = controller.findInput('Restart');
+        _randomNumberInput = controller.findInput('RandomNumber');
       }
       setState(() => _coinFlipArtboard = artboard);
     });
