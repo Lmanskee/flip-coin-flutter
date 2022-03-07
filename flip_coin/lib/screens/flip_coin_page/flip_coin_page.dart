@@ -1,7 +1,7 @@
 import 'dart:math';
-import 'package:flutter/material.dart';
+import 'package:flip_coin/screens/default.dart';
+  import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
-import 'package:flip_coin/screens/buttons.dart';
 
 class FlipCoinPage extends StatefulWidget {
   const FlipCoinPage({ Key? key }) : super(key: key);
@@ -12,9 +12,11 @@ class FlipCoinPage extends StatefulWidget {
 
 class _FlipCoinPageState extends State< FlipCoinPage> { 
   // CoinFlipAnimation Inputs
-  SMITrigger? _PlayInput;
-  SMINumber? _RandomNumberInput;
-
+  SMITrigger? _playInput;
+  SMINumber? _randomNumberInput;
+  
+  bool _isButtonVisible = true;
+  
   // CoinFlipAnimationInit
   void _onCoinFlipInit(Artboard artboard) {
     final controller = StateMachineController.fromArtboard(
@@ -23,13 +25,19 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
     );
     artboard.addController(controller!);
 
-    _PlayInput = controller.findInput<bool>('Play') as SMITrigger;
-    _RandomNumberInput = controller.findInput<double>('RandomNumber') as SMINumber;
+    _playInput = controller.findInput<bool>('Play') as SMITrigger;
+    _randomNumberInput = controller.findInput<double>('RandomNumber') as SMINumber;
   }
 
   _playAnimation() {
-    _PlayInput?.fire();
+    _randomNumberInput?.value = (1 + Random().nextInt(2).toDouble());
+    _playInput?.fire();
     // Adicionar lógica para mudar de tela logo após a animação ter rodado.
+  }
+
+  _navigateToRestartPage() async {
+    await Future.delayed(const Duration(milliseconds: 5500), () {});
+    return AlertDialog();
   }
   
   @override
@@ -53,12 +61,30 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
             ],
           ),
 
-          Container(
-            alignment: Alignment.center,
-            child: PlayAnimationButton(
-              icon: Icons.replay_rounded,
-              onPressedFunction: _playAnimation(),
-            ),
+          AnimatedOpacity(
+            duration: const Duration(milliseconds: 1000),
+            opacity: _isButtonVisible ? 1.0 : 0.0,
+            child: TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: buttonColor,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30))
+                ),
+                fixedSize: buttonSize,
+              ),
+
+              onPressed: () {
+                _playAnimation();
+                _navigateToRestartPage();
+                _isButtonVisible = !_isButtonVisible;
+              },
+              
+              child: const Icon(
+                Icons.play_arrow_rounded,
+                color: Colors.white,
+                size: 100,
+              ),
+            )
           ),
         ]
       )
