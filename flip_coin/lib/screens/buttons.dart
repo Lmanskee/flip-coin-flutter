@@ -34,38 +34,3 @@ class RouteChangeButton extends StatelessWidget {
     );
   }
 }
-
-
-class PlayAnimationButton extends StatelessWidget {
-  final icon;
-  final onPressedFunction;
-  
-  const PlayAnimationButton({ 
-    Key? key, 
-    this.icon, 
-    this.onPressedFunction 
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      style: TextButton.styleFrom(
-        backgroundColor: buttonColor,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(30))
-        ),
-        fixedSize: buttonSize,
-      ),
-
-      onPressed: () {
-        onPressedFunction();
-      },
-      
-      child: Icon(
-        icon,
-        color: Colors.white,
-        size: 100,
-      ),
-    );
-  }
-}
