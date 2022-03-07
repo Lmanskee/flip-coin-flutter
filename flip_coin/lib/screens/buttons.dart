@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flip_coin/screens/default.dart';
 
-class EntryAppButton extends StatefulWidget {
-  const EntryAppButton({ Key? key }) : super(key: key);
+class RouteChangeButton extends StatelessWidget {
+  final icon;
+  final onPressed;
+  
+  const RouteChangeButton({ 
+    Key? key, 
+    this.icon, 
+    this.onPressed 
+  }) : super(key: key);
 
-  @override
-  State<EntryAppButton> createState() => _EntryAppButtonState();
-}
-
-class _EntryAppButtonState extends State<EntryAppButton> {
   @override
   Widget build(BuildContext context) {
     return TextButton(
@@ -21,11 +23,46 @@ class _EntryAppButtonState extends State<EntryAppButton> {
       ),
 
       onPressed: () {
-        Navigator.of(context).pushNamed('/flip');
+        Navigator.of(context).pushNamed(onPressed);
       },
       
-      child: const Icon(
-        Icons.play_arrow_rounded,
+      child: Icon(
+        icon,
+        color: Colors.white,
+        size: 100,
+      ),
+    );
+  }
+}
+
+
+class PlayAnimationButton extends StatelessWidget {
+  final icon;
+  final onPressedFunction;
+  
+  const PlayAnimationButton({ 
+    Key? key, 
+    this.icon, 
+    this.onPressedFunction 
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      style: TextButton.styleFrom(
+        backgroundColor: buttonColor,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30))
+        ),
+        fixedSize: buttonSize,
+      ),
+
+      onPressed: () {
+        onPressedFunction();
+      },
+      
+      child: Icon(
+        icon,
         color: Colors.white,
         size: 100,
       ),
