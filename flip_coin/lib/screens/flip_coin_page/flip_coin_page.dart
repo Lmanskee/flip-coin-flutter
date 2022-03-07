@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flip_coin/screens/default.dart';
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
 class FlipCoinPage extends StatefulWidget {
@@ -37,7 +37,7 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
 
   _navigateToRestartPage() async {
     await Future.delayed(const Duration(milliseconds: 5500), () {});
-    return AlertDialog();
+    Navigator.of(context).pushNamed('/');
   }
   
   @override
