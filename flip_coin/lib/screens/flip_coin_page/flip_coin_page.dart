@@ -32,11 +32,11 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
   _playAnimation() {
     _randomNumberInput?.value = (1 + Random().nextInt(2).toDouble());
     _playInput?.fire();
-    // Adicionar lógica para mudar de tela logo após a animação ter rodado.
+    // Adicionar lógica para carregar popup após a animação ter rodado.
   }
 
   _navigateToRestartPage() async {
-    await Future.delayed(const Duration(milliseconds: 5500), () {});
+    await Future.delayed(const Duration(milliseconds: 6000), () {});
     Navigator.of(context).pushNamed('/');
   }
   
@@ -76,7 +76,9 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
               onPressed: () {
                 _playAnimation();
                 _navigateToRestartPage();
-                _isButtonVisible = !_isButtonVisible;
+                setState(() {
+                  _isButtonVisible = !_isButtonVisible;
+                });
               },
               
               child: const Icon(
