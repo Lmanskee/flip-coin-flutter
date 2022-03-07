@@ -9,7 +9,7 @@ class EntryAppButton extends StatefulWidget {
 }
 
 class _EntryAppButtonState extends State<EntryAppButton> {
-   @override
+  @override
   Widget build(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(
