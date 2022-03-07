@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
-const Color buttonColor = Color.fromRGBO(255, 213, 0, 1);
-const Color mainAppColor = Color.fromRGBO(255, 254, 238, 1);
+const Color buttonColor = Color(0xFFFFD500);
+const Color mainAppColor = Color(0xFFFFFEEE);
 const Size buttonSize = Size(130, 130);
