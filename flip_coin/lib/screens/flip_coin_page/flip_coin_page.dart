@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
-
+import 'package:flip_coin/screens/buttons.dart';
 
 class FlipCoinPage extends StatefulWidget {
   const FlipCoinPage({ Key? key }) : super(key: key);
@@ -13,13 +13,7 @@ class FlipCoinPage extends StatefulWidget {
 class _FlipCoinPageState extends State< FlipCoinPage> { 
   // CoinFlipAnimation Inputs
   SMITrigger? _PlayInput;
-  SMITrigger? _RestartInput;
-  SMINumber? _randomNumberInput;
-
-  // PlayPauseButtonAnimation Inputs
-  SMIBool? _isPlayingInput; 
-
-  bool _isRestartButton = false;
+  SMINumber? _RandomNumberInput;
 
   // CoinFlipAnimationInit
   void _onCoinFlipInit(Artboard artboard) {
@@ -30,41 +24,12 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
     artboard.addController(controller!);
 
     _PlayInput = controller.findInput<bool>('Play') as SMITrigger;
-    _RestartInput = controller.findInput<bool>('Restart') as SMITrigger;
-    _randomNumberInput = controller.findInput<double>('RandomNumber') as SMINumber;
+    _RandomNumberInput = controller.findInput<double>('RandomNumber') as SMINumber;
   }
 
-  void _playCoinFlipAnimation() {
-    _randomNumberInput?.value = (1 + Random().nextInt(2).toDouble());
-    
-    if (_isRestartButton == false) {
-      _PlayInput?.fire();
-    } else {
-      _RestartInput?.fire();
-    }
-  }
-
-  // PlayPauseButtonInit
-  void _onPlayPauseButtonInit(Artboard artboard) {
-    final controller = StateMachineController.fromArtboard(
-      artboard, 
-      'PlayPauseButton',
-    );
-    artboard.addController(controller!);
-
-    _isPlayingInput = controller.findInput<bool>('isPlaying') as SMIBool;
-  }
-
-  void _playPauseButtonAnimation() {
-    if (_isPlayingInput?.value == false &&
-        _isPlayingInput?.controller.isActive == false) {
-      _isPlayingInput?.value = true;
-      _isRestartButton = false;
-    } else if (_isPlayingInput?.value == true &&
-        _isPlayingInput?.controller.isActive == false) {
-      _isPlayingInput?.value = false;
-      _isRestartButton = true;
-    }
+  _playAnimation() {
+    _PlayInput?.fire();
+    // Adicionar lógica para mudar de tela logo após a animação ter rodado.
   }
   
   @override
@@ -77,8 +42,8 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 370,
-                width: 370,
+                height: MediaQuery.of(context).size.width,
+                width: MediaQuery.of(context).size.width,
                 child: RiveAnimation.asset(
                   'assets/coinflip.riv',
                   fit: BoxFit.cover,
@@ -88,22 +53,13 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
             ],
           ),
 
-          GestureDetector(
-            child: SizedBox(
-              height: 150,
-              width: 150  ,
-              child: RiveAnimation.asset(
-                'assets/playpausebutton.riv',
-                fit: BoxFit.cover,
-                onInit: _onPlayPauseButtonInit,
-              ),
+          Container(
+            alignment: Alignment.center,
+            child: PlayAnimationButton(
+              icon: Icons.replay_rounded,
+              onPressedFunction: _playAnimation(),
             ),
-            onTap: () {
-              setState(() {
-                _playCoinFlipAnimation();
-                _playPauseButtonAnimation();
-              });
-            })
+          ),
         ]
       )
     );
