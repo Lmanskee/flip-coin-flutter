@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../buttons.dart';
-import '../default.dart';
+import 'package:flip_coin/screens/buttons.dart';
+import 'package:flip_coin/screens/default.dart';
 import 'custom_rounded_clipper.dart';
 
 class HomePage extends StatefulWidget {
@@ -51,7 +51,10 @@ class _HomePageState extends State<HomePage> {
 
           Container(
             alignment: Alignment.center,
-            child: const EntryAppButton(),
+            child: const RouteChangeButton(
+              icon: Icons.play_arrow,
+              onPressed: '/flip',
+            ),
           ),
         ],
       )
