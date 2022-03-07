@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flip_coin/screens/buttons.dart';
 import 'package:flip_coin/screens/default.dart';
 import 'custom_rounded_clipper.dart';
 
@@ -51,10 +50,25 @@ class _HomePageState extends State<HomePage> {
 
           Container(
             alignment: Alignment.center,
-            child: const RouteChangeButton(
-              icon: Icons.play_arrow_rounded,
-              onPressed: '/flip',
-            ),
+            child: TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: buttonColor,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30))
+                ),
+                fixedSize: buttonSize,
+              ),
+
+              onPressed: () {
+                Navigator.of(context).pushNamed('/flip');
+              },
+              
+              child: const Icon(
+                Icons.play_arrow_rounded,
+                color: Colors.white,
+                size: 100,
+              ),
+            )
           ),
         ],
       )
