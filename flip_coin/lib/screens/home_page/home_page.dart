@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             alignment: Alignment.center,
             child: const RouteChangeButton(
-              icon: Icons.play_arrow,
+              icon: Icons.play_arrow_rounded,
               onPressed: '/flip',
             ),
           ),
