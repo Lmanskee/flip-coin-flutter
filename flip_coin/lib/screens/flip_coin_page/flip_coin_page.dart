@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:math';
 import 'package:flip_coin/screens/default.dart';
 import 'package:flutter/material.dart';
@@ -12,14 +11,17 @@ class FlipCoinPage extends StatefulWidget {
 }
 
 class _FlipCoinPageState extends State< FlipCoinPage> { 
-  // CoinFlipAnimation Inputs
   SMITrigger? _playInput;
+  SMITrigger? _restartInput;
   SMINumber? _randomNumberInput;
   
+  // Valores booleanos que lidam com a lógica da animação feita com Rive (novo Flare)
+  // e com as funções empregadas pelos botões que alteram o State da animação no StateMachine.
   bool _isButtonVisible = true;
   bool _isRestartButton = false;
+  bool _isPlayButtonDisabled = false;
+  bool _isRestartButtonDisabled = false;
   
-  // CoinFlipAnimationInit
   void _onCoinFlipInit(Artboard artboard) {
     final controller = StateMachineController.fromArtboard(
       artboard, 
@@ -28,6 +30,7 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
     artboard.addController(controller!);
 
     _playInput = controller.findInput<bool>('Play') as SMITrigger;
+    _restartInput = controller.findInput<bool>('Restart') as SMITrigger;
     _randomNumberInput = controller.findInput<double>('RandomNumber') as SMINumber;
   }
 
@@ -36,25 +39,41 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
     _playInput?.fire();
   }
 
-  _navigateToRestartPage() {
-    return TextButton(
-      style: TextButton.styleFrom(
-        backgroundColor: buttonColor,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(30))
-        ),
-        fixedSize: buttonSize,
-      ),
+  _restartAnimation() {
+    _restartInput?.fire();
+  }
 
-      onPressed: () {
-        Navigator.of(context).pushNamed('/flip');
-      },
-      
-      child: const Icon(
-        Icons.replay_rounded,
-        color: Colors.white,
-        size: 100,
-      ),
+  _showRestartButton() {
+    return AnimatedOpacity(
+      duration: const Duration(milliseconds: 500),
+      opacity: _isButtonVisible ? 1.0 : 0.0, 
+      child: TextButton(
+        style: TextButton.styleFrom(
+          backgroundColor: buttonColor,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(30))
+          ),
+          fixedSize: buttonSize,
+        ),
+
+        onPressed: _isRestartButtonDisabled
+        ? null
+        : () async {
+          _restartAnimation();
+          setState(() {
+            _isRestartButtonDisabled = true;
+            _isButtonVisible = false;
+          });
+          await Future.delayed(const Duration(milliseconds: 1300));
+          Navigator.of(context).pushNamed('/flip');
+        },
+
+        child: const Icon(
+          Icons.replay_rounded,
+          color: Colors.white,
+          size: 100,
+        )
+      )
     );
   }
   
@@ -80,9 +99,9 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
           ),
 
           _isRestartButton? 
-          _navigateToRestartPage()
+          _showRestartButton()
           : AnimatedOpacity(
-            duration: const Duration(milliseconds: 1000),
+            duration: const Duration(milliseconds: 500),
             opacity: _isButtonVisible ? 1.0 : 0.0,
             child: TextButton(
               style: TextButton.styleFrom(
@@ -93,12 +112,19 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
                 fixedSize: buttonSize,
               ),
 
-              onPressed: () {
+              onPressed: _isPlayButtonDisabled 
+              ? null
+              : () async {
                 _playAnimation();
-                _navigateToRestartPage();
-                _isRestartButton = true;
                 setState(() {
                   _isButtonVisible = false;
+                  _isPlayButtonDisabled = true;                  
+                });
+              
+                await Future.delayed(const Duration(milliseconds: 5200));
+                _isRestartButton = true;
+                setState(() {
+                  _isButtonVisible = true;
                 });
               },
               
