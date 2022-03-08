@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Curva que copia um círculo (moeda amarela) na tela principal
 class CustomRoundedClipper extends CustomClipper<Path>{
   @override
   Path getClip(Size size) {
