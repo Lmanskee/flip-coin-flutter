@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 import 'package:flip_coin/screens/default.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
   SMINumber? _randomNumberInput;
   
   bool _isButtonVisible = true;
+  bool _isRestartButton = false;
   
   // CoinFlipAnimationInit
   void _onCoinFlipInit(Artboard artboard) {
@@ -32,12 +34,28 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
   _playAnimation() {
     _randomNumberInput?.value = (1 + Random().nextInt(2).toDouble());
     _playInput?.fire();
-    // Adicionar lógica para carregar popup após a animação ter rodado.
   }
 
-  _navigateToRestartPage() async {
-    await Future.delayed(const Duration(milliseconds: 6000), () {});
-    Navigator.of(context).pushNamed('/');
+  _navigateToRestartPage() {
+    return TextButton(
+      style: TextButton.styleFrom(
+        backgroundColor: buttonColor,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30))
+        ),
+        fixedSize: buttonSize,
+      ),
+
+      onPressed: () {
+        Navigator.of(context).pushNamed('/flip');
+      },
+      
+      child: const Icon(
+        Icons.replay_rounded,
+        color: Colors.white,
+        size: 100,
+      ),
+    );
   }
   
   @override
@@ -61,7 +79,9 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
             ],
           ),
 
-          AnimatedOpacity(
+          _isRestartButton? 
+          _navigateToRestartPage()
+          : AnimatedOpacity(
             duration: const Duration(milliseconds: 1000),
             opacity: _isButtonVisible ? 1.0 : 0.0,
             child: TextButton(
@@ -76,8 +96,9 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
               onPressed: () {
                 _playAnimation();
                 _navigateToRestartPage();
+                _isRestartButton = true;
                 setState(() {
-                  _isButtonVisible = !_isButtonVisible;
+                  _isButtonVisible = false;
                 });
               },
               
