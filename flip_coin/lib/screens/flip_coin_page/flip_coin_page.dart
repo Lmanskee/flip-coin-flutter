@@ -43,7 +43,7 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
     _restartInput?.fire();
   }
 
-  _showRestartButton() {
+  _showRestartButton()
     return AnimatedOpacity(
       duration: const Duration(milliseconds: 500),
       opacity: _isButtonVisible ? 1.0 : 0.0, 
