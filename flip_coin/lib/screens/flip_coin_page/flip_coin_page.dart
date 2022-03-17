@@ -90,7 +90,7 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
                 height: MediaQuery.of(context).size.width,
                 width: MediaQuery.of(context).size.width,
                 child: RiveAnimation.asset(
-                  'assets/coinflip.riv',
+                  'assets/coins/coinflip-default.riv', // Add function that returns a link for a coin skin
                   fit: BoxFit.cover,
                   onInit: _onCoinFlipInit,
                 )
