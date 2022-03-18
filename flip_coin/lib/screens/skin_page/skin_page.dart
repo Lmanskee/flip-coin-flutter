@@ -48,7 +48,10 @@ class _SkinPageState extends State<SkinPage> {
                     children: [
                       Row(
                         children: [
-                          Image(image: )
+                          Image(
+                            image: Image.network('https://'),
+                          ),
+                          
                           Text('Moeda'),
                         ],
                       ),
