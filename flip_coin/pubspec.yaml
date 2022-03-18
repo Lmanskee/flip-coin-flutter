@@ -78,10 +78,6 @@ flutter:
     - assets/coins/coinflip-default.riv
     - assets/coins/coinflip-half-dollar.riv
   
-    # PNG files
-    - assets/coins/pngs/default.png
-    - assets/coins/pngs/half-dollar-coin.png
-    
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
