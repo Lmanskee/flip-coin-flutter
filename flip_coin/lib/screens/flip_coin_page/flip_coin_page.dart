@@ -1,7 +1,12 @@
 import 'dart:math';
 import 'package:flip_coin/screens/default.dart';
+import 'package:flip_coin/screens/skin_page/skin_page.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
+
+
+
+String _riveAnimation = 'assets/coins/coinflip-default.riv'; 
 
 class FlipCoinPage extends StatefulWidget {
   const FlipCoinPage({ Key? key }) : super(key: key);
@@ -90,7 +95,7 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
                 height: MediaQuery.of(context).size.width,
                 width: MediaQuery.of(context).size.width,
                 child: RiveAnimation.asset(
-                  'assets/coins/coinflip-default.riv', // Add function that returns a link for a coin skin
+                  _riveAnimation, // Add function that returns a link for a coin skin
                   fit: BoxFit.cover,
                   onInit: _onCoinFlipInit,
                 )
@@ -136,7 +141,15 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
             )
           ),
         ]
-      )
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).pushNamed('/skins');
+        },
+        backgroundColor: Colors.green,
+        child: const Icon(Icons.navigation),
+      ),
     );
   }
 }

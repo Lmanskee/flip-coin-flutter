@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flip_coin/screens/home_page/home_page.dart';
 import 'package:flip_coin/screens/flip_coin_page/flip_coin_page.dart';
+import 'package:flip_coin/screens/skin_page/skin_page.dart';
 import 'package:flip_coin/screens/default.dart';
 
 void main() => runApp(const MyApp());
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/':(context) => const HomePage(),
         '/flip':(context) => const FlipCoinPage(),
+        '/skins':(context) => const SkinPage()
       },
     );
   }
