@@ -47,11 +47,7 @@ class _SkinPageState extends State<SkinPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Row(
-                        children: [
-                          Image(
-                            image: Image.network('https://'),
-                          ),
-                          
+                        children: [                         
                           Text('Moeda'),
                         ],
                       ),
