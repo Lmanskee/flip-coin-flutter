@@ -6,8 +6,12 @@ This repo is only used to host and serve static assets in support of [Flip Coin 
 
 Reference the assets with this URL structure:
 
-`https://flutter.github.io/assets-for-api-docs/assets/<library>/<asset>`
+`https://lmanskee.github.io/flip_coin_flutter/assets/<library>/<asset>`
 
-For example, an image named `app_bar.png` about `AppBar` from the material library would go in the `assets/material/` directory and be at `https://flutter.github.io/assets-for-api-docs/assets/material/app_bar.png`.
+For example, an image named `default.png` would go in the `assets/pngs/` directory and be at `https://lmanskee.github.io/flip_coin_flutter/assets/pngs/default.png`.
+
+![Default Coin](./assets/pngs/default.png)
+
+
 
 All asset files should be under the assets directory in an appropriate subdirectory.
