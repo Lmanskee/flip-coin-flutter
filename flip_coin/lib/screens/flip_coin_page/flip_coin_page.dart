@@ -3,8 +3,6 @@ import 'package:flip_coin/screens/default.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
-String _riveAnimation = 'assets/coinflip-default.riv'; 
-
 class FlipCoinPage extends StatefulWidget {
   const FlipCoinPage({ Key? key }) : super(key: key);
 
@@ -125,7 +123,10 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
                 height: MediaQuery.of(context).size.width,
                 width: MediaQuery.of(context).size.width,
                 child: RiveAnimation.asset(
-                  _riveAnimation,
+                  'assets/coinflip-default.riv', 
+                  // passar currentAnimation, que estará salvo
+                  // num arquivo JSON. No skin_page.dart vou salvar no JSON a 
+                  // animação selecionada. Caso o json esteja vazio: colocar animação padrão
                   fit: BoxFit.cover,
                   onInit: _onCoinFlipInit,
                 )

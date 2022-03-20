@@ -15,15 +15,39 @@ class _SkinPageState extends State<SkinPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image(
-                  image: NetworkImage(
-                    'https://lmanskee.github.io/flip_coin_flutter/assets/pngs/default.png',
-                    scale: 1),
-                )
-              ],
+            GestureDetector(
+              onTap: () {
+                print('default-coin');
+              },
+
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image(
+                        width: 240,
+                        height: 240,
+                        image: NetworkImage(
+                          'https://lmanskee.github.io/flip_coin_flutter/assets/pngs/default.png'),
+                      )
+                    ],
+                  ),
+            
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Default Coin',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 24 
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
             
             Container(
@@ -33,34 +57,146 @@ class _SkinPageState extends State<SkinPage> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Row(
-                        children: [
-                          Text('Moeda'),
-                        ],
+                      GestureDetector(
+                        onTap: () {
+                          print('half-dollar-coin');
+                        },
+
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Image(
+                                  width: 160,
+                                  height: 160,
+                                  image: NetworkImage(
+                                    'https://lmanskee.github.io/flip_coin_flutter/assets/pngs/half-dollar.png'),
+                                )
+                              ],
+                            ),
+                      
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Half Dollar Coin',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
 
-                      Row(
-                        children: [
-                          Text('Moeda'),
-                        ],
-                      )
+                      GestureDetector(
+                        onTap: () {
+                          print('libra-coin');
+                        },
+
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Image(
+                                  width: 160,
+                                  height: 160,
+                                  image: NetworkImage(
+                                    'https://lmanskee.github.io/flip_coin_flutter/assets/pngs/default.png'),
+                                )
+                              ],
+                            ),
+                      
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Libra Coin',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
 
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Row(
-                        children: [                         
-                          Text('Moeda'),
-                        ],
+                      GestureDetector(
+                        onTap: () {
+                          print('eur-coin');
+                        },
+
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Image(
+                                  width: 160,
+                                  height: 160,
+                                  image: NetworkImage(
+                                    'https://lmanskee.github.io/flip_coin_flutter/assets/pngs/default.png'),
+                                )
+                              ],
+                            ),
+                      
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Eur Coin',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
 
-                      Row(
-                        children: [
-                          Text('Moeda'),
-                        ],
-                      )
+                      GestureDetector(
+                        onTap: () {
+                          print('real-coin');
+                        },
+
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Image(
+                                  width: 160,
+                                  height: 160,
+                                  image: NetworkImage(
+                                    'https://lmanskee.github.io/flip_coin_flutter/assets/pngs/default.png'),
+                                )
+                              ],
+                            ),
+                      
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Real Coin',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   )
                 ],
