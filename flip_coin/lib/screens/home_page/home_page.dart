@@ -29,13 +29,13 @@ class _HomePageState extends State<HomePage> {
                         TextSpan(text: 'Coin\n', style: TextStyle(
                           fontFamily: "Montserrat", 
                           fontSize: 55,
-                          letterSpacing: -1,
+                          letterSpacing: -3,
                         )),
                 
                         TextSpan(text: 'Flip', style: TextStyle(
                           fontFamily: "Montserrat", 
-                          fontSize: 115,
-                          letterSpacing: -1,
+                          fontSize: 140,
+                          letterSpacing: -10,
                           height: .9,
                         )),
                       ]
@@ -46,7 +46,9 @@ class _HomePageState extends State<HomePage> {
             ]
           ),
 
-          const SizedBox(height: 60),
+          SizedBox(
+            height: MediaQuery.of(context).size.height*.1,
+          ),
 
           Container(
             alignment: Alignment.center,

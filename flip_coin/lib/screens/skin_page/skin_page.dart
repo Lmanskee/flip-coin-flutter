@@ -18,7 +18,11 @@ class _SkinPageState extends State<SkinPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Moeda')
+                Image(
+                  image: NetworkImage(
+                    'https://lmanskee.github.io/flip_coin_flutter/assets/pngs/default.png',
+                    scale: 1),
+                )
               ],
             ),
             

@@ -1,12 +1,9 @@
 import 'dart:math';
 import 'package:flip_coin/screens/default.dart';
-import 'package:flip_coin/screens/skin_page/skin_page.dart';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
-
-
-String _riveAnimation = 'assets/coins/coinflip-default.riv'; 
+String _riveAnimation = 'assets/coinflip-default.riv'; 
 
 class FlipCoinPage extends StatefulWidget {
   const FlipCoinPage({ Key? key }) : super(key: key);
@@ -86,16 +83,49 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  top: 50,
+                  right: 30
+                ),
+
+                child: TextButton(
+                  child: Text(
+                    'Skins',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 32,
+                      letterSpacing: -1
+                    ),
+                  ),
+                  style: TextButton.styleFrom(
+                    backgroundColor: buttonColor,
+                    padding: EdgeInsets.all(16),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(40)
+                      )
+                    ),       
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/skins');
+                  },
+                ),
+              )
+            ],
+          ),
+
+          Row(
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.width,
                 width: MediaQuery.of(context).size.width,
                 child: RiveAnimation.asset(
-                  _riveAnimation, // Add function that returns a link for a coin skin
+                  _riveAnimation,
                   fit: BoxFit.cover,
                   onInit: _onCoinFlipInit,
                 )
@@ -141,14 +171,6 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
             )
           ),
         ]
-      ),
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).pushNamed('/skins');
-        },
-        backgroundColor: Colors.green,
-        child: const Icon(Icons.navigation),
       ),
     );
   }
