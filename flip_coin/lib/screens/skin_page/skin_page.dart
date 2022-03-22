@@ -33,19 +33,6 @@ class _SkinPageState extends State<SkinPage> {
                       )
                     ],
                   ),
-            
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Default Coin',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 24 
-                        ),
-                      )
-                    ],
-                  ),
                 ],
               ),
             ),
@@ -74,19 +61,6 @@ class _SkinPageState extends State<SkinPage> {
                                 )
                               ],
                             ),
-                      
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Half Dollar Coin',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16
-                                  ),
-                                )
-                              ],
-                            ),
                           ],
                         ),
                       ),
@@ -105,19 +79,6 @@ class _SkinPageState extends State<SkinPage> {
                                   height: 160,
                                   image: NetworkImage(
                                     'https://lmanskee.github.io/flip_coin_flutter/assets/pngs/default.png'),
-                                )
-                              ],
-                            ),
-                      
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Libra Coin',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16
-                                  ),
                                 )
                               ],
                             ),
@@ -147,19 +108,6 @@ class _SkinPageState extends State<SkinPage> {
                                 )
                               ],
                             ),
-                      
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Eur Coin',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16
-                                  ),
-                                )
-                              ],
-                            ),
                           ],
                         ),
                       ),
@@ -178,19 +126,6 @@ class _SkinPageState extends State<SkinPage> {
                                   height: 160,
                                   image: NetworkImage(
                                     'https://lmanskee.github.io/flip_coin_flutter/assets/pngs/default.png'),
-                                )
-                              ],
-                            ),
-                      
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Real Coin',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16
-                                  ),
                                 )
                               ],
                             ),
