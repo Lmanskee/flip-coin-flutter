@@ -1,8 +1,8 @@
 import 'dart:math';
 import 'dart:convert';
 import 'package:flip_coin/screens/default.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rive/rive.dart';
 
 class FlipCoinPage extends StatefulWidget {
@@ -12,7 +12,7 @@ class FlipCoinPage extends StatefulWidget {
   _FlipCoinPageState createState() => _FlipCoinPageState();
 }
 
-class _FlipCoinPageState extends State< FlipCoinPage> { 
+class _FlipCoinPageState extends State<FlipCoinPage> { 
   SMITrigger? _playInput;
   SMITrigger? _restartInput;
   SMINumber? _randomNumberInput;
@@ -24,20 +24,21 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
     
   String _currentAnimation = '';
 
-  @override
-  void initState() {
-    super.initState();
-    readJson();
-  }
-  
-  Future<void> readJson() async {
-    final String response = await rootBundle.loadString('assets/current_animation.json');
-    final data = await json.decode(response);
+  void readJson() async {
+    final jsonText = await rootBundle.loadString("assets/json/current_animation.json");
+    final data = json.decode(jsonText);
     setState(() {
       _currentAnimation = data["currentAnimation"];
     });
   }
+  
 
+  @override
+  void initState() {
+    super.initState();
+    readJson();
+    print(_currentAnimation);
+  }
 
   void _onCoinFlipInit(Artboard artboard) {
     final controller = StateMachineController.fromArtboard(
