@@ -65,7 +65,7 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
             _isButtonVisible = false;
           });
           await Future.delayed(const Duration(milliseconds: 1300));
-          Navigator.of(context).pushNamed('/flip');
+          Navigator.of(context).pushReplacementNamed('/flip');
         },
 
         child: const Icon(
