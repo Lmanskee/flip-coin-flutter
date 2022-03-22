@@ -40,6 +40,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: "^0.9.2"
+  flutter_lints: ^1.0.4
 
 flutter_icons:
   android: true
@@ -74,9 +75,8 @@ flutter:
   # https://flutter.dev/assets-and-images/#from-packages
 
   assets:
-    - assets/coinflip-default.riv
-    - assets/coinflip-half-dollar.riv
-    - assets/json/current_animation.json
+    - assets/
+    - assets/json/currentAnimation.json
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
