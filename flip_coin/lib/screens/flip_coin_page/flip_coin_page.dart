@@ -1,8 +1,8 @@
-import 'dart:convert';
 import 'dart:math';
+import 'dart:convert';
 import 'package:flip_coin/screens/default.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
 class FlipCoinPage extends StatefulWidget {
@@ -21,8 +21,23 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
   bool _isRestartButton = false;
   bool _isPlayButtonDisabled = false;
   bool _isRestartButtonDisabled = false;
+    
+  String _currentAnimation = '';
+
+  @override
+  void initState() {
+    super.initState();
+    readJson();
+  }
   
-  String currentAnimation = '';
+  Future<void> readJson() async {
+    final String response = await rootBundle.loadString('assets/current_animation.json');
+    final data = await json.decode(response);
+    setState(() {
+      _currentAnimation = data["currentAnimation"];
+    });
+  }
+
 
   void _onCoinFlipInit(Artboard artboard) {
     final controller = StateMachineController.fromArtboard(
@@ -77,19 +92,10 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
         )
       )
     );
-  }
+  } 
 
-  Future<void> readJsonCurrentAnimation() async {
-    String response = await rootBundle.loadString("assets/json/current_animation.json");
-    final data = jsonDecode(response);
-    setState(() {
-      currentAnimation = data["currentAnimation"];
-    });
-  }
-  
   @override
   Widget build(BuildContext context) {
-    // print(currentAnimation);
     return Scaffold(
       body: Column(
         children: [
@@ -134,11 +140,11 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
                 height: MediaQuery.of(context).size.width,
                 width: MediaQuery.of(context).size.width,
                 child: RiveAnimation.asset(
-                  currentAnimation, 
+                  _currentAnimation, 
                   fit: BoxFit.cover,
                   onInit: _onCoinFlipInit,
                 )
-              ),
+              )
             ],
           ),
 
@@ -148,6 +154,7 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
             duration: const Duration(milliseconds: 500),
             opacity: _isButtonVisible ? 1.0 : 0.0,
             child: TextButton(
+              
               style: TextButton.styleFrom(
                 backgroundColor: buttonColor,
                 shape: const RoundedRectangleBorder(
@@ -184,3 +191,4 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
     );
   }
 }
+
