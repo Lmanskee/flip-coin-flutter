@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:math';
 import 'package:flip_coin/screens/default.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:rive/rive.dart';
 
 class FlipCoinPage extends StatefulWidget {
@@ -14,14 +16,14 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
   SMITrigger? _playInput;
   SMITrigger? _restartInput;
   SMINumber? _randomNumberInput;
-  
-  // Valores booleanos que lidam com a lógica da animação feita com Rive (novo Flare)
-  // e com as funções empregadas pelos botões que alteram o State da animação no StateMachine.
+
   bool _isButtonVisible = true;
   bool _isRestartButton = false;
   bool _isPlayButtonDisabled = false;
   bool _isRestartButtonDisabled = false;
   
+  String currentAnimation = '';
+
   void _onCoinFlipInit(Artboard artboard) {
     final controller = StateMachineController.fromArtboard(
       artboard, 
@@ -76,9 +78,18 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
       )
     );
   }
+
+  Future<void> readJsonCurrentAnimation() async {
+    String response = await rootBundle.loadString("assets/json/current_animation.json");
+    final data = jsonDecode(response);
+    setState(() {
+      currentAnimation = data["currentAnimation"];
+    });
+  }
   
   @override
   Widget build(BuildContext context) {
+    // print(currentAnimation);
     return Scaffold(
       body: Column(
         children: [
@@ -123,10 +134,7 @@ class _FlipCoinPageState extends State< FlipCoinPage> {
                 height: MediaQuery.of(context).size.width,
                 width: MediaQuery.of(context).size.width,
                 child: RiveAnimation.asset(
-                  'assets/coinflip-default.riv', 
-                  // passar currentAnimation, que estará salvo
-                  // num arquivo JSON. No skin_page.dart vou salvar no JSON a 
-                  // animação selecionada. Caso o json esteja vazio: colocar animação padrão
+                  currentAnimation, 
                   fit: BoxFit.cover,
                   onInit: _onCoinFlipInit,
                 )
