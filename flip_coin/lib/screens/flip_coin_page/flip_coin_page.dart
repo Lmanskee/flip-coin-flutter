@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:convert';
 import 'package:flip_coin/screens/default.dart';
+import 'package:flip_coin/screens/flip_coin_page/current_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rive/rive.dart';
@@ -21,23 +22,10 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
   bool _isRestartButton = false;
   bool _isPlayButtonDisabled = false;
   bool _isRestartButtonDisabled = false;
-    
-  String _currentAnimation = '';
 
-  void readJson() async {
-    final jsonText = await rootBundle.loadString("assets/json/current_animation.json");
-    final data = json.decode(jsonText);
-    setState(() {
-      _currentAnimation = data["currentAnimation"];
-    });
-  }
-  
-
-  @override
-  void initState() {
-    super.initState();
-    readJson();
-    print(_currentAnimation);
+  Future<CurrentAnimation> readJson() async {
+    final jsonText = await rootBundle.loadString("assets/current-animation.json");
+    return CurrentAnimation.fromJson(json.decode(jsonText));  
   }
 
   void _onCoinFlipInit(Artboard artboard) {
@@ -93,103 +81,112 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
         )
       )
     );
-  } 
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  top: 50,
-                  right: 30
+      body: FutureBuilder<CurrentAnimation>(
+        future: readJson(),
+        builder: (context, AsyncSnapshot<CurrentAnimation> snapshot) {
+          final currentAnimation = snapshot.data?.currentAnimation;
+          if (snapshot.hasData) {
+            return Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 50,
+                        right: 30
+                      ),
+          
+                      child: TextButton(
+                        child: const Text(
+                          'Skins',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 32,
+                            letterSpacing: -1
+                          ),
+                        ),
+                        style: TextButton.styleFrom(
+                          backgroundColor: buttonColor,
+                          padding: const EdgeInsets.all(16),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(40)
+                            )
+                          ),       
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('/skins');
+                        },
+                      ),
+                    )
+                  ],
                 ),
-
-                child: TextButton(
-                  child: Text(
-                    'Skins',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 32,
-                      letterSpacing: -1
-                    ),
-                  ),
-                  style: TextButton.styleFrom(
-                    backgroundColor: buttonColor,
-                    padding: EdgeInsets.all(16),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(40)
+          
+                Row(
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.width,
+                      width: MediaQuery.of(context).size.width,
+                      child: RiveAnimation.asset(
+                        currentAnimation.toString(), 
+                        fit: BoxFit.cover,
+                        onInit: _onCoinFlipInit,
                       )
-                    ),       
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/skins');
-                  },
+                    )
+                  ],
                 ),
-              )
-            ],
-          ),
-
-          Row(
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.width,
-                width: MediaQuery.of(context).size.width,
-                child: RiveAnimation.asset(
-                  _currentAnimation, 
-                  fit: BoxFit.cover,
-                  onInit: _onCoinFlipInit,
-                )
-              )
-            ],
-          ),
-
-          _isRestartButton? 
-          _showRestartButton()
-          : AnimatedOpacity(
-            duration: const Duration(milliseconds: 500),
-            opacity: _isButtonVisible ? 1.0 : 0.0,
-            child: TextButton(
-              
-              style: TextButton.styleFrom(
-                backgroundColor: buttonColor,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30))
+          
+                _isRestartButton? 
+                _showRestartButton()
+                : AnimatedOpacity(
+                  duration: const Duration(milliseconds: 500),
+                  opacity: _isButtonVisible ? 1.0 : 0.0,
+                  child: TextButton(
+                    
+                    style: TextButton.styleFrom(
+                      backgroundColor: buttonColor,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30))
+                      ),
+                      fixedSize: buttonSize,
+                    ),
+          
+                    onPressed: _isPlayButtonDisabled 
+                    ? null
+                    : () async {
+                      _playAnimation();
+                      setState(() {
+                        _isButtonVisible = false;
+                        _isPlayButtonDisabled = true;                  
+                      });
+                    
+                      await Future.delayed(const Duration(milliseconds: 5200));
+                      _isRestartButton = true;
+                      setState(() {
+                        _isButtonVisible = true;
+                      });
+                    },
+                    
+                    child: const Icon(
+                      Icons.play_arrow_rounded,
+                      color: Colors.white,
+                      size: 100,
+                    ),
+                  )
                 ),
-                fixedSize: buttonSize,
-              ),
+              ]
+            );
+          } 
 
-              onPressed: _isPlayButtonDisabled 
-              ? null
-              : () async {
-                _playAnimation();
-                setState(() {
-                  _isButtonVisible = false;
-                  _isPlayButtonDisabled = true;                  
-                });
-              
-                await Future.delayed(const Duration(milliseconds: 5200));
-                _isRestartButton = true;
-                setState(() {
-                  _isButtonVisible = true;
-                });
-              },
-              
-              child: const Icon(
-                Icons.play_arrow_rounded,
-                color: Colors.white,
-                size: 100,
-              ),
-            )
-          ),
-        ]
+          return const CircularProgressIndicator();
+        }
       ),
     );
   }
 }
-
