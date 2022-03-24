@@ -1,10 +1,9 @@
-import 'dart:math';
-import 'dart:convert';
+import 'package:flip_coin/controller/current_animation_controller.dart';
 import 'package:flip_coin/screens/default.dart';
-import 'package:flip_coin/screens/flip_coin_page/current_animation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'dart:math';
 import 'package:rive/rive.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FlipCoinPage extends StatefulWidget {
   const FlipCoinPage({ Key? key }) : super(key: key);
@@ -22,11 +21,6 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
   bool _isRestartButton = false;
   bool _isPlayButtonDisabled = false;
   bool _isRestartButtonDisabled = false;
-
-  Future<CurrentAnimation> readJson() async {
-    final jsonText = await rootBundle.loadString("assets/current-animation.json");
-    return CurrentAnimation.fromJson(json.decode(jsonText));  
-  }
 
   void _onCoinFlipInit(Artboard artboard) {
     final controller = StateMachineController.fromArtboard(
@@ -85,108 +79,103 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
 
   @override
   Widget build(BuildContext context) {
+    context.read<CurrentAnimationController>().readCurrentAnimation();
     return Scaffold(
-      body: FutureBuilder<CurrentAnimation>(
-        future: readJson(),
-        builder: (context, AsyncSnapshot<CurrentAnimation> snapshot) {
-          final currentAnimation = snapshot.data?.currentAnimation;
-          if (snapshot.hasData) {
-            return Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 50,
-                        right: 30
-                      ),
-          
-                      child: TextButton(
-                        child: const Text(
-                          'Skins',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 32,
-                            letterSpacing: -1
-                          ),
-                        ),
-                        style: TextButton.styleFrom(
-                          backgroundColor: buttonColor,
-                          padding: const EdgeInsets.all(16),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(40)
-                            )
-                          ),       
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/skins');
-                        },
-                      ),
-                    )
-                  ],
+      body: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 50,
+                  right: 30
                 ),
-          
-                Row(
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.width,
-                      width: MediaQuery.of(context).size.width,
-                      child: RiveAnimation.asset(
-                        currentAnimation.toString(), 
-                        fit: BoxFit.cover,
-                        onInit: _onCoinFlipInit,
-                      )
-                    )
-                  ],
-                ),
-          
-                _isRestartButton? 
-                _showRestartButton()
-                : AnimatedOpacity(
-                  duration: const Duration(milliseconds: 500),
-                  opacity: _isButtonVisible ? 1.0 : 0.0,
-                  child: TextButton(
-                    
-                    style: TextButton.styleFrom(
-                      backgroundColor: buttonColor,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(30))
-                      ),
-                      fixedSize: buttonSize,
-                    ),
-          
-                    onPressed: _isPlayButtonDisabled 
-                    ? null
-                    : () async {
-                      _playAnimation();
-                      setState(() {
-                        _isButtonVisible = false;
-                        _isPlayButtonDisabled = true;                  
-                      });
-                    
-                      await Future.delayed(const Duration(milliseconds: 5200));
-                      _isRestartButton = true;
-                      setState(() {
-                        _isButtonVisible = true;
-                      });
-                    },
-                    
-                    child: const Icon(
-                      Icons.play_arrow_rounded,
+    
+                child: TextButton(
+                  child: const Text(
+                    'Skins',
+                    style: TextStyle(
                       color: Colors.white,
-                      size: 100,
+                      fontSize: 32,
+                      letterSpacing: -1
                     ),
-                  )
+                  ),
+                  style: TextButton.styleFrom(
+                    backgroundColor: buttonColor,
+                    padding: const EdgeInsets.all(16),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(40)
+                      )
+                    ),       
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/skins');
+                  },
                 ),
-              ]
-            );
-          } 
-
-          return const CircularProgressIndicator();
-        }
-      ),
+              )
+            ],
+          ),
+    
+          Row(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.width,
+                width: MediaQuery.of(context).size.width,
+                child: RiveAnimation.asset(
+                  context.select(
+                    (CurrentAnimationController controller) => controller.curAnimation != null 
+                      ? controller.curAnimation!.currentAnimation
+                      : 'assets/coinflip-default.riv'
+                  ), 
+                  fit: BoxFit.cover,
+                  onInit: _onCoinFlipInit,
+                )
+              )
+            ],
+          ),
+    
+          _isRestartButton? 
+          _showRestartButton()
+          : AnimatedOpacity(
+            duration: const Duration(milliseconds: 500),
+            opacity: _isButtonVisible ? 1.0 : 0.0,
+            child: TextButton(
+              
+              style: TextButton.styleFrom(
+                backgroundColor: buttonColor,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30))
+                ),
+                fixedSize: buttonSize,
+              ),
+    
+              onPressed: _isPlayButtonDisabled 
+              ? null
+              : () async {
+                _playAnimation();
+                setState(() {
+                  _isButtonVisible = false;
+                  _isPlayButtonDisabled = true;                  
+                });
+              
+                await Future.delayed(const Duration(milliseconds: 5200));
+                _isRestartButton = true;
+                setState(() {
+                  _isButtonVisible = true;
+                });
+              },
+              
+              child: const Icon(
+                Icons.play_arrow_rounded,
+                color: Colors.white,
+                size: 100,
+              ),
+            )
+          ),
+        ]           
+      )
     );
   }
 }

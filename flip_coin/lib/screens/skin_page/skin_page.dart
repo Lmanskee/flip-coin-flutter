@@ -1,4 +1,6 @@
+import 'package:flip_coin/controller/current_animation_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SkinPage extends StatefulWidget {
   const SkinPage({ Key? key }) : super(key: key);
@@ -53,6 +55,11 @@ class _SkinPageState extends State<SkinPage> {
                         ),
                       ],
                     ),
+          
+                    onTap: () {
+                      context.read<CurrentAnimationController>().writeCurrentAnimation('assets/coinflip-half-dollar.riv');
+                      Navigator.of(context).pushReplacementNamed('/flip');
+                    }
                   ),
 
                   GestureDetector(
@@ -60,12 +67,7 @@ class _SkinPageState extends State<SkinPage> {
                       children: [
                         Row(
                           children: const [
-                            Image(
-                              width: 160,
-                              height: 160,
-                              image: NetworkImage(
-                                'https://lmanskee.github.io/flip_coin_flutter/assets/pngs/default.png'),
-                            )
+                            Text('Moeda de libra')
                           ],
                         ),
                       ],
@@ -82,12 +84,7 @@ class _SkinPageState extends State<SkinPage> {
                       children: [
                         Row(
                           children: const [
-                            Image(
-                              width: 160,
-                              height: 160,
-                              image: NetworkImage(
-                                'https://lmanskee.github.io/flip_coin_flutter/assets/pngs/default.png'),
-                            )
+                            Text('Moeda de Euro')
                           ],
                         ),
                       ],
@@ -99,12 +96,7 @@ class _SkinPageState extends State<SkinPage> {
                       children: [
                         Row(
                           children: const [
-                            Image(
-                              width: 160,
-                              height: 160,
-                              image: NetworkImage(
-                                'https://lmanskee.github.io/flip_coin_flutter/assets/pngs/default.png'),
-                            )
+                            Text('Moeda de um real')
                           ],
                         ),
                       ],
