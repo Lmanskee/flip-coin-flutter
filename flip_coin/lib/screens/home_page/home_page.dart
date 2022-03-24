@@ -1,7 +1,6 @@
-import 'package:flip_coin/widgets/action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flip_coin/default_value/default.dart';
-import 'package:flip_coin/screens/home_page/custom_rounded_clipper.dart';
+import 'custom_rounded_clipper.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({ Key? key }) : super(key: key);
@@ -53,9 +52,24 @@ class _HomePageState extends State<HomePage> {
 
           Container(
             alignment: Alignment.center,
-            child: FlipCoinActionButton(
-                  icon: Icons.play_arrow_rounded, 
-                  onPressed: () => Navigator.of(context).pushReplacementNamed('/flip'),
+            child: TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: buttonColor,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(30))
+                ),
+                fixedSize: buttonSize,
+              ),
+
+              onPressed: () {
+                Navigator.of(context).pushNamed('/flip');
+              },
+              
+              child: const Icon(
+                Icons.play_arrow_rounded,
+                color: Colors.white,
+                size: 100,
+              ),
             )
           ),
         ],
