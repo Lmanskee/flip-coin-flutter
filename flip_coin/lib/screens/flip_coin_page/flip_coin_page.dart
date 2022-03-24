@@ -1,5 +1,5 @@
 import 'package:flip_coin/controller/current_animation_controller.dart';
-import 'package:flip_coin/screens/default.dart';
+import 'package:flip_coin/default_value/default.dart';
 import 'dart:math';
 import 'package:rive/rive.dart';
 import 'package:flutter/material.dart';

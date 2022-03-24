@@ -2,7 +2,7 @@ import 'package:flip_coin/controller/current_animation_controller.dart';
 import 'package:flip_coin/screens/home_page/home_page.dart';
 import 'package:flip_coin/screens/flip_coin_page/flip_coin_page.dart';
 import 'package:flip_coin/screens/skin_page/skin_page.dart';
-import 'package:flip_coin/screens/default.dart';
+import 'package:flip_coin/default_value/default.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
