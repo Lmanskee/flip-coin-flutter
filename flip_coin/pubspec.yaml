@@ -77,6 +77,7 @@ flutter:
   # https://flutter.dev/assets-and-images/#from-packages
 
   assets:
+    - assets/pngs/
     - assets/coinflip-default.riv
     - assets/coinflip-half-dollar.riv
     - assets/current_animation.json
