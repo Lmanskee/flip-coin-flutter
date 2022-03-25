@@ -1,4 +1,8 @@
+import 'dart:math';
+
 import 'package:flip_coin/controller/current_animation_controller.dart';
+import 'package:flip_coin/default_value/default.dart';
+import 'package:flip_coin/screens/skin_page/skin_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,100 +17,113 @@ class _SkinPageState extends State<SkinPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      body: ListView(
         children: [
-          GestureDetector(
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Image(
-                      width: 240,
-                      height: 240,
-                      image: NetworkImage(
-                        'https://lmanskee.github.io/flip_coin_flutter/assets/pngs/default.png'),
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ),
-          
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GestureDetector(
-                    child: Column(
-                      children: [
-                        Row(
-                          children: const [
-                            Image(
-                              width: 160,
-                              height: 160,
-                              image: NetworkImage(
-                                'https://lmanskee.github.io/flip_coin_flutter/assets/pngs/half-dollar.png'),
-                            )
-                          ],
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 25,
+                  bottom: 25
+                ),
+        
+                child: TextButton(
+                  child: Row(
+                    children: const [
+                      Icon(
+                        Icons.arrow_back_ios_rounded,
+                        size: 28,
+                        color: Colors.white,
+                      ),
+        
+                      SizedBox(
+                        width: 8,
+                      ),
+        
+                      Text(
+                        "Let's flip",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 28,
+                          letterSpacing: -1
                         ),
-                      ],
-                    ),
-          
-                    onTap: () {
-                      context.read<CurrentAnimationController>().writeCurrentAnimation('assets/coinflip-half-dollar.riv');
-                      Navigator.of(context).pushReplacementNamed('/flip');
-                    }
+                      ),
+                    ],
                   ),
-
-                  GestureDetector(
-                    child: Column(
-                      children: [
-                        Row(
-                          children: const [
-                            Text('Moeda de libra')
-                          ],
-                        ),
-                      ],
-                    ),
+                  style: TextButton.styleFrom(
+                    backgroundColor: buttonColor,
+                    padding: const EdgeInsets.all(16),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(40)
+                      )
+                    ),       
                   ),
-                ],
-              ),
-
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GestureDetector(
-                    child: Column(
-                      children: [
-                        Row(
-                          children: const [
-                            Text('Moeda de Euro')
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  GestureDetector(
-                    child: Column(
-                      children: [
-                        Row(
-                          children: const [
-                            Text('Moeda de um real')
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/flip');
+                  },
+                ),
               )
             ],
-          ),           
-        ]
+          ),
+        
+          SkinsButton(
+            imagePath: 'assets/pngs/default.png',
+            onPressed: () async {
+              await context.read<CurrentAnimationController>().writeCurrentAnimation('assets/coinflip-default.riv');
+              Navigator.of(context).pushReplacementNamed('/flip');
+            },
+            heigth: 280,
+            width: 280,
+          ),
+          
+          const SizedBox(
+            height: 28,
+          ),
+        
+          SkinsButton(
+            imagePath: 'assets/pngs/half-dollar.png',
+            onPressed: () async {
+              await context.read<CurrentAnimationController>().writeCurrentAnimation('assets/coinflip-half-dollar.riv');
+              Navigator.of(context).pushReplacementNamed('/flip');
+            },
+            heigth: 280,
+            width: 280,
+          ),
+          
+          const SizedBox(
+            height: 28,
+          ),
+        
+          SkinsButton(
+            imagePath: 'assets/pngs/default.png',
+            onPressed: () {
+              context.read<CurrentAnimationController>().writeCurrentAnimation('assets/coinflip-half-dollar.riv');
+              Navigator.of(context).pushReplacementNamed('/flip');
+            },
+            heigth: 280,
+            width: 280,
+          ),
+          
+          const SizedBox(
+            height: 28,
+          ),
+        
+          SkinsButton(
+            imagePath: 'assets/pngs/default.png',
+            onPressed: () {
+              context.read<CurrentAnimationController>().writeCurrentAnimation('assets/coinflip-half-dollar.riv');
+              Navigator.of(context).pushReplacementNamed('/flip');
+            },
+            heigth: 280,
+            width: 280,
+          ),
+
+          const SizedBox(
+            height: 45,
+          ),
+        ],
       )
     );
   }

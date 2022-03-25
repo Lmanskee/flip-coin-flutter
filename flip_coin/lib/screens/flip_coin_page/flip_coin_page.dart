@@ -93,13 +93,27 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
                 ),
     
                 child: TextButton(
-                  child: const Text(
-                    'Skins',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 32,
-                      letterSpacing: -1
-                    ),
+                  child: Row(
+                    children: const [
+                      Text(
+                        "Change coin",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 28,
+                          letterSpacing: -1
+                        ),
+                      ),
+
+                      SizedBox(
+                        width: 8,
+                      ),
+
+                      Icon(
+                        Icons.arrow_forward_rounded,
+                        size: 28,
+                        color: Colors.white,
+                      )
+                    ],
                   ),
                   style: TextButton.styleFrom(
                     backgroundColor: buttonColor,
