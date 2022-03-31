@@ -45,7 +45,3 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-
-# Private informations
-/android/app/src/main/AndroidManifest.xml
-
