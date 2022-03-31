@@ -37,6 +37,7 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
   _playAnimation() {
     _randomNumberInput?.value = (1 + Random().nextInt(2).toDouble());
     _playInput?.fire();
+    /* Play an audio file. Exc.: finish audio */
   }
 
   _restartAnimation() {
