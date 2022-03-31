@@ -1,17 +1,26 @@
-import 'package:flip_coin/controller/current_animation_controller.dart';
+import 'package:flip_coin/current_animation_manager/controller/current_animation_controller.dart';
 import 'package:flip_coin/screens/home_page/home_page.dart';
 import 'package:flip_coin/screens/flip_coin_page/flip_coin_page.dart';
 import 'package:flip_coin/screens/skin_page/skin_page.dart';
-import 'package:flip_coin/default_value/default.dart';
+import 'package:flip_coin/default_values/default.dart';
+
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 
-void main() => runApp(
-  MultiProvider(
-    providers: [ChangeNotifierProvider(create: (_) => CurrentAnimationController())],
-    child: const MyApp(),
-  ),
-);
+import 'package:google_mobile_ads/google_mobile_ads.dart'; 
+
+void main() { 
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
+
+  runApp(
+    MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => CurrentAnimationController())],
+      child: const MyApp(),
+    ),
+  );
+}
 
 class MyApp extends StatefulWidget {
   const MyApp({ Key? key }) : super(key: key);

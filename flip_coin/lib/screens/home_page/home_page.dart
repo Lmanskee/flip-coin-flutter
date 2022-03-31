@@ -1,6 +1,7 @@
+import 'package:flip_coin/default_values/default.dart';
+import 'package:flip_coin/screens/home_page/custom_rounded_clipper.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flip_coin/default_value/default.dart';
-import 'custom_rounded_clipper.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({ Key? key }) : super(key: key);

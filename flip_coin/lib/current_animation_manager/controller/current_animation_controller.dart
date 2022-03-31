@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flip_coin/current_animation_manager.dart';
-import 'package:flip_coin/model/current_animation.dart';
+import 'package:flip_coin/current_animation_manager/current_animation_manager.dart';
+import 'package:flip_coin/current_animation_manager/model/current_animation.dart';
 
 class CurrentAnimationController extends ChangeNotifier {
   CurrentAnimation? _curAnimation;

@@ -1,9 +1,14 @@
-import 'package:flip_coin/controller/current_animation_controller.dart';
-import 'package:flip_coin/default_value/default.dart';
+import 'package:flip_coin/current_animation_manager/controller/current_animation_controller.dart';
+import 'package:flip_coin/default_values/default.dart';
+
 import 'dart:math';
+
 import 'package:rive/rive.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 
 class FlipCoinPage extends StatefulWidget {
   const FlipCoinPage({ Key? key }) : super(key: key);

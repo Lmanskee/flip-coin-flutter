@@ -1,4 +1,5 @@
-import 'package:flip_coin/default_value/default.dart';
+import 'package:flip_coin/default_values/default.dart';
+
 import 'package:flutter/material.dart';
 
 class SkinsButton extends StatefulWidget {

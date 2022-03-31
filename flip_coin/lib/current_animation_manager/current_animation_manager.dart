@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
+
+import 'package:flip_coin/current_animation_manager/model/current_animation.dart';
+
 import 'package:path_provider/path_provider.dart';
-import 'package:flip_coin/model/current_animation.dart';
 
 class CurrentAnimationManager {
   Future<String> get _directoryPath async {
@@ -24,7 +26,6 @@ class CurrentAnimationManager {
         fileContent = await file.readAsString();
         return json.decode(fileContent);
       } catch (e) {
-        print(e); 
         return null;
       }
     }
