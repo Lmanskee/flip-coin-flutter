@@ -37,6 +37,7 @@ dependencies:
   rive: ^0.8.4
   path_provider: ^2.0.9
   provider: ^6.0.2
+  google_mobile_ads: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -77,10 +78,8 @@ flutter:
   # https://flutter.dev/assets-and-images/#from-packages
 
   assets:
-    - assets/pngs/
     - assets/coinflip-default.riv
     - assets/coinflip-half-dollar.riv
-    - assets/current_animation.json
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
