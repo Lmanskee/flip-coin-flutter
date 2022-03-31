@@ -97,9 +97,9 @@ class _SkinPageState extends State<SkinPage> {
           ),
         
           SkinsButton(
-            imagePath: 'assets/pngs/default.png',
+            imagePath: 'assets/pngs/one-real.png',
             onPressed: () {
-              context.read<CurrentAnimationController>().writeCurrentAnimation('assets/coinflip-half-dollar.riv');
+              context.read<CurrentAnimationController>().writeCurrentAnimation('assets/coinflip-one-real.riv');
               Navigator.of(context).pushReplacementNamed('/flip');
             },
             heigth: 280,
