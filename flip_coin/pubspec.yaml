@@ -37,7 +37,6 @@ dependencies:
   rive: ^0.8.4
   path_provider: ^2.0.9
   provider: ^6.0.2
-  google_mobile_ads: ^1.1.0
 
 dev_dependencies:
   flutter_test:
