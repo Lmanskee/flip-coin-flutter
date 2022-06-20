@@ -67,7 +67,13 @@ class _SkinPageState extends State<SkinPage> {
               )
             ],
           ),
-        
+          
+          // SkinsButton repetidos...
+          // Criar um for loop passando arquivo PNG + arquivo RIV
+          
+          
+ 
+          
           SkinsButton(
             imagePath: 'assets/pngs/default.png',
             onPressed: () async {
