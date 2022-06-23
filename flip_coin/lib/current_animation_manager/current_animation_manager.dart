@@ -17,7 +17,7 @@ class CurrentAnimationManager {
   }
 
   Future readJsonFile() async {
-    String fileContent = 'assets/coinflip-default.riv';
+    String fileContent = 'assets/rivs/default-coin-animation.riv';
 
     File file = await _jsonFile;
 

@@ -70,14 +70,39 @@ class _SkinPageState extends State<SkinPage> {
           
           // SkinsButton repetidos...
           // Criar um for loop passando arquivo PNG + arquivo RIV
-          
-          
- 
-          
+
           SkinsButton(
-            imagePath: 'assets/pngs/default.png',
+            imagePath: 'assets/pngs/default-coin.png',
             onPressed: () async {
-              await context.read<CurrentAnimationController>().writeCurrentAnimation('assets/coinflip-default.riv');
+              await context.read<CurrentAnimationController>().writeCurrentAnimation('assets/rivs/default-coin-animation.riv');
+              Navigator.of(context).pushReplacementNamed('/flip');
+            },
+            heigth: 280,
+            width: 280,
+          ),
+          
+          const SizedBox(
+            height: 28,
+          ),
+        
+          SkinsButton(
+            imagePath: 'assets/pngs/heart-coin.png',
+            onPressed: () async {
+              await context.read<CurrentAnimationController>().writeCurrentAnimation('assets/rivs/heart-coin-animation.riv');
+              Navigator.of(context).pushReplacementNamed('/flip');
+            },
+            heigth: 280,
+            width: 280,
+          ),
+          
+          const SizedBox(
+            height: 28,
+          ),
+        
+          SkinsButton(
+            imagePath: 'assets/pngs/one-real-coin.png',
+            onPressed: () {
+              context.read<CurrentAnimationController>().writeCurrentAnimation('assets/rivs/one-real-animation.riv');
               Navigator.of(context).pushReplacementNamed('/flip');
             },
             heigth: 280,
@@ -90,36 +115,8 @@ class _SkinPageState extends State<SkinPage> {
         
           SkinsButton(
             imagePath: 'assets/pngs/half-dollar.png',
-            onPressed: () async {
-              await context.read<CurrentAnimationController>().writeCurrentAnimation('assets/coinflip-half-dollar.riv');
-              Navigator.of(context).pushReplacementNamed('/flip');
-            },
-            heigth: 280,
-            width: 280,
-          ),
-          
-          const SizedBox(
-            height: 28,
-          ),
-        
-          SkinsButton(
-            imagePath: 'assets/pngs/one-real.png',
             onPressed: () {
-              context.read<CurrentAnimationController>().writeCurrentAnimation('assets/coinflip-one-real.riv');
-              Navigator.of(context).pushReplacementNamed('/flip');
-            },
-            heigth: 280,
-            width: 280,
-          ),
-          
-          const SizedBox(
-            height: 28,
-          ),
-        
-          SkinsButton(
-            imagePath: 'assets/pngs/default.png',
-            onPressed: () {
-              context.read<CurrentAnimationController>().writeCurrentAnimation('assets/coinflip-half-dollar.riv');
+              context.read<CurrentAnimationController>().writeCurrentAnimation('assets/rivs/half-dollar-animation.riv');
               Navigator.of(context).pushReplacementNamed('/flip');
             },
             heigth: 280,

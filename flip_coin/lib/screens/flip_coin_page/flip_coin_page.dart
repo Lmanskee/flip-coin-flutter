@@ -24,6 +24,7 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
   bool _isPlayButtonDisabled = false;
   bool _isRestartButtonDisabled = false;
 
+
   void _onCoinFlipInit(Artboard artboard) {
     final controller = StateMachineController.fromArtboard(
       artboard, 
@@ -36,15 +37,18 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
     _randomNumberInput = controller.findInput<double>('RandomNumber') as SMINumber;
   }
 
+
   _playAnimation() {
     _randomNumberInput?.value = (1 + Random().nextInt(2).toDouble());
     _playInput?.fire();
     /* Play an audio file. Exc.: finish audio */
   }
 
+
   _restartAnimation() {
     _restartInput?.fire();
   }
+
 
   _showRestartButton() {
     return AnimatedOpacity(
@@ -67,7 +71,7 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
             _isRestartButtonDisabled = true;
             _isButtonVisible = false;
           });
-          await Future.delayed(const Duration(milliseconds: 1300));
+          await Future.delayed(const Duration(milliseconds: 1000));
           Navigator.of(context).pushReplacementNamed('/flip');
         },
 
@@ -80,12 +84,14 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
     );
   }
 
+
   @override
   Widget build(BuildContext context) {
     context.read<CurrentAnimationController>().readCurrentAnimation();
     return Scaffold(
       body: Column(
         children: [
+          // Change coin button
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -135,6 +141,7 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
             ],
           ),
     
+    
           Row(
             children: [
               SizedBox(
@@ -144,7 +151,7 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
                   context.select(
                     (CurrentAnimationController controller) => controller.curAnimation != null 
                       ? controller.curAnimation!.currentAnimation
-                      : 'assets/coinflip-default.riv'
+                      : 'assets/rivs/default-coin-animation.riv'
                   ), 
                   fit: BoxFit.cover,
                   onInit: _onCoinFlipInit,
@@ -152,6 +159,7 @@ class _FlipCoinPageState extends State<FlipCoinPage> {
               )
             ],
           ),
+
     
           _isRestartButton? 
           _showRestartButton()
