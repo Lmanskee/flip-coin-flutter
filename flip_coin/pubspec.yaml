@@ -77,8 +77,8 @@ flutter:
   # https://flutter.dev/assets-and-images/#from-packages
 
   assets:
-    - assets/coinflip-default.riv
-    - assets/coinflip-half-dollar.riv
+    - assets/rivs/
+    - assets/pngs/
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
